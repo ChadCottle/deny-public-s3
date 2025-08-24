@@ -1,7 +1,7 @@
-package s3policy
+package s3
 
-deny[message] {
-  input.resource_type == "aws_s3_bucket"
-  input.acl == "public-read"
-  message := "S3 buckets cannot be publicly readable (acl: public-read)"
+deny_public_s3 contains bucket if {
+    bucket := input
+    bucket.resource_type == "aws_s3_bucket"
+    bucket.acl == "public-read"
 }
