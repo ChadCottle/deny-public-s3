@@ -1,0 +1,3 @@
+aws s3api put-public-access-block \
+    --bucket <your_bucket_name> \
+    --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
