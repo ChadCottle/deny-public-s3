@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Retrieve the list of S3 bucket names and format them as a simple list of lines.
+# The --output text flag is key for this to work easily with bash.
+bucket_names=$(aws s3api list-buckets --query "Buckets[].Name" --output text)
+
+# Populate a bash array from the list of names.
+# The `readarray` command is a clean way to handle this.
+readarray -t s3_buckets <<< "$bucket_names"
+
+# Now you can use the array in your script.
+# This loop demonstrates how to iterate over the array elements.
+echo "Found ${#s3_buckets[@]} S3 buckets:"
+for bucket in "${s3_buckets[@]}"; do
+  echo " - $bucket"
+done
